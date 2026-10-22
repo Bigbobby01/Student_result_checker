@@ -30,3 +30,4 @@ elif score >= 45:
     print("Status: Pass")
 else:
     print("Status: Fail")    
+# My first project tracked with Git    
