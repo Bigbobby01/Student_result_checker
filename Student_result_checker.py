@@ -27,6 +27,9 @@ while True:
         except ValueError:
             print("Please enter a valid number!")
     grade = calculate_grade(score)
+    with open("student_records.txt", "a") as file:
+         file.write(f"{name} - Score: {score} - Grade: {grade}\n")
+    print("Student record saved successfully!")
     print("\n" + "=" * 30)
     print("      STUDENT RESULT REPORT")
     print("=" * 30)
