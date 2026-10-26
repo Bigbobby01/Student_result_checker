@@ -54,3 +54,8 @@ print("Students Passed:", passed)
 print("Students Failed:", failed)
 print("Total Students:", passed + failed)
 print("=" * 30)
+print("\nSAVED STUDENT RECORDS")
+print("=" * 30)
+with open("student_records.txt", "r") as file:
+    records = file.read()
+print(records)
