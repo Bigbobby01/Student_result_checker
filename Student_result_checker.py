@@ -70,6 +70,7 @@ def search_student():
         if search_name in record.lower():
             print(record.strip())
             found = True
+            break
     if not found:
         print("Student not found.")
 def show_menu():
