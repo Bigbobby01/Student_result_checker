@@ -11,42 +11,44 @@ def calculate_grade(score):
         return "F"
 passed = 0
 failed = 0
-while True:
+def check_student():
+    global passed, failed
     while True:
-        name = input("Enter student's name: ").strip()
-        if name:
+        while True:
+            name = input("Enter student's name: ").strip()
+            if name:
+                break
+            print("Student name cannot be empty. Please try again!")
+        while True:
+            try:
+                score = int(input("Enter the student's score: "))
+                if score < 0 or score > 100:
+                    print("Score must be between 0 and 100!")
+                    continue
+                break
+            except ValueError:
+                print("Please enter a valid number!")
+        grade = calculate_grade(score)
+        with open("student_records.txt", "a") as file:
+            file.write(f"{name} - Score: {score} - Grade: {grade}\n")
+        print("Student record saved successfully!")
+        print("\n" + "=" * 30)
+        print("      STUDENT RESULT REPORT")
+        print("=" * 30)
+        print("Student Name:", name)
+        print("Score:", score, "/ 100")
+        print("Grade:", grade)
+        if score >= 45:
+            print("Status: PASS")
+            passed += 1
+        else:
+            print("Status: FAIL")
+            failed += 1
+        print("=" * 30)
+        again = input("Check another student? (yes/no): ").strip().lower()
+        if again == "no":
+            print("Thank you for using Student Result Checker!")
             break
-        print("Student name cannot be empty. Please try again!")
-    while True:
-        try:
-            score = int(input("Enter the student's score: "))
-            if score < 0 or score > 100:
-                print("Score must be between 0 and 100!")
-                continue
-            break
-        except ValueError:
-            print("Please enter a valid number!")
-    grade = calculate_grade(score)
-    with open("student_records.txt", "a") as file:
-         file.write(f"{name} - Score: {score} - Grade: {grade}\n")
-    print("Student record saved successfully!")
-    print("\n" + "=" * 30)
-    print("      STUDENT RESULT REPORT")
-    print("=" * 30)
-    print("Student Name:", name)
-    print("Score:", score, "/ 100")
-    print("Grade:", grade)
-    if score >= 45:
-        print("Status: PASS")
-        passed += 1
-    else:
-        print("Status: FAIL")
-        failed += 1
-    print("=" * 30)
-    again = input("Check another student? (yes/no): ").strip().lower()
-    if again == "no":
-        print("Thank you for using Student Result Checker!")
-        break
 print("\n" + "=" * 30)
 print("       CLASS SUMMARY")
 print("=" * 30)
@@ -59,3 +61,25 @@ print("=" * 30)
 with open("student_records.txt", "r") as file:
     records = file.read()
 print(records)
+def show_menu():
+    print("\n===== STUDENT RESULT CHECKER =====")
+    print()
+    print("1. Check a new student")
+    print("2. View saved student records")
+    print("3. Exit")
+    print()
+    choice = input("Choose an option: ")
+    return choice
+while True:
+    choice = show_menu()
+    if choice == "1":
+        check_student()
+    elif choice == "2":
+        with open("student_records.txt", "r") as file:
+            records = file.read()
+        print(records)
+    elif choice == "3":
+        print("Thank you for using Student Result Checker!")
+        break
+    else:
+        print("Invalid option. Please choose 1, 2, or 3.")      
