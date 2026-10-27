@@ -61,12 +61,24 @@ print("=" * 30)
 with open("student_records.txt", "r") as file:
     records = file.read()
 print(records)
+def search_student():
+    search_name = input("Enter the student's name to search: ").strip().lower()
+    with open("student_records.txt", "r") as file:
+        records = file.readlines()
+    found = False
+    for record in records:
+        if search_name in record.lower():
+            print(record.strip())
+            found = True
+    if not found:
+        print("Student not found.")
 def show_menu():
     print("\n===== STUDENT RESULT CHECKER =====")
     print()
     print("1. Check a new student")
     print("2. View saved student records")
-    print("3. Exit")
+    print("3. Search for a student")
+    print("4. Exit")
     print()
     choice = input("Choose an option: ")
     return choice
@@ -79,7 +91,9 @@ while True:
             records = file.read()
         print(records)
     elif choice == "3":
+        search_student()
+    elif choice == "4":
         print("Thank you for using Student Result Checker!")
         break
     else:
-        print("Invalid option. Please choose 1, 2, or 3.")      
+        print("Invalid option. Please choose 1, 2, 3, or 4.")
