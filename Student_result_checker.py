@@ -19,6 +19,20 @@ def check_student():
             if name:
                 break
             print("Student name cannot be empty. Please try again!")
+        with open("student_records.txt", "r") as file:
+           records = file.readlines()
+           duplicate_found = False
+        for record in records:
+            saved_name = record.split(" - ")[0].strip().lower()
+            if name.lower() == saved_name:
+                duplicate_found = True
+                break
+        if duplicate_found:
+            print(f"Warning: A record for {name} already exists.")
+            confirm = input("Do you want to continue? (yes/no): ").strip().lower()
+            if confirm != "yes":
+                print("Student entry cancelled.")
+                continue
         while True:
             try:
                 score = int(input("Enter the student's score: "))
