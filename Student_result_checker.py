@@ -67,7 +67,8 @@ def search_student():
         records = file.readlines()       
     matching_records = []
     for record in records:
-        if search_name in record.lower():
+        student_name = record.split(" - ")[0].strip().lower()
+        if search_name == student_name:
             matching_records.append(record.strip())
     if matching_records:
         print(matching_records[-1])
