@@ -64,14 +64,14 @@ print(records)
 def search_student():
     search_name = input("Enter the student's name to search: ").strip().lower()
     with open("student_records.txt", "r") as file:
-        records = file.readlines()
-    found = False
+        records = file.readlines()       
+    matching_records = []
     for record in records:
         if search_name in record.lower():
-            print(record.strip())
-            found = True
-            break
-    if not found:
+            matching_records.append(record.strip())
+    if matching_records:
+        print(matching_records[-1])
+    else:
         print("Student not found.")
 def show_menu():
     print("\n===== STUDENT RESULT CHECKER =====")
