@@ -103,9 +103,15 @@ while True:
     if choice == "1":
         check_student()
     elif choice == "2":
-        with open("student_records.txt", "r") as file:
-            records = file.read()
-        print(records)
+        try:
+            with open("student_records.txt", "r") as file:
+                records = file.read()
+            if records:
+                print(records)
+            else:
+                print("No student records found yet.")
+        except FileNotFoundError:
+            print("No student records found yet.")
     elif choice == "3":
         search_student()
     elif choice == "4":
